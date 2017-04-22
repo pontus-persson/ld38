@@ -1,5 +1,4 @@
 "use strict";
-console.log('assets loading');
 var Assets = function(parent) {
     console.log('assets constructing');
     var self = this;

@@ -1,4 +1,10 @@
 "use strict";
+/**
+ * Line between two points
+ * @param {*} v1 
+ * @param {*} v2 
+ * @param {*} parent 
+ */
 var Line = function(v1, v2, parent) {
     var self = this;
     this.parent = parent || null;
@@ -18,20 +24,9 @@ var Line = function(v1, v2, parent) {
 		ctx.moveTo(this.v1.position.x, this.v1.position.y);
         ctx.lineTo(this.v2.position.x, this.v2.position.y);
 		ctx.closePath();
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.4)';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
         // ctx.strokeStyle = '#000000';
 		ctx.stroke();
-
-
-		ctx.beginPath();
-		ctx.moveTo(this.parent.center.x, this.parent.center.y);
-        ctx.lineTo(this.delta.x, this.delta.y);
-		ctx.closePath();
-        ctx.strokeStyle = 'rgba(255, 0, 0, 0.4)';
-        // ctx.strokeStyle = '#000000';
-		ctx.stroke();
-
-
     }
 
     this.update = function() {

@@ -1,5 +1,4 @@
 "use strict";
-console.log('input loading');
 var Input = function() {
     console.log('input constructing');
     var self = this;
@@ -10,17 +9,13 @@ var Input = function() {
         'enter':  13,
         'space':  32,
         'escape': 27,
+        'plus':   107,
+        'minus':  109,
         // function keys
         'f1': 112,
         'f2': 113,
         'f3': 114,
         'f4': 115,
-        // '5': 53,
-        // '6': 54,
-        // '7': 55,
-        // '8': 56,
-        // '9': 57,
-        // '0': 58,
         // numbers
         '1': 49,
         '2': 50,
@@ -68,7 +63,7 @@ var Input = function() {
         var event = window.event || e;
         this.keysPressed[event.keyCode] = true;
         // this.eventBuffer.push({ type: 'keyPressed', data: event.keyCode });
-        console.log(event.keyCode);
+        // console.log(event.keyCode);
     }
 
     // handles keyboard release of key
