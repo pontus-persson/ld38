@@ -17,4 +17,22 @@ var Entity = function(x, y) {
         self.collision.draw(ctx);
     }
 
+    this.move = function(x, y) {
+
+    }
+
+    this.setPos = function(x, y) {
+        this.collision.verticies[0].position.set(x, y);
+        this.collision.verticies[0].oldPosition.set(x, y);
+
+        this.collision.verticies[1].position.set(x, y+this.collision.h);
+        this.collision.verticies[1].oldPosition.set(x, y+this.collision.h);
+
+        this.collision.verticies[2].position.set(x+this.collision.w, y+this.collision.h);
+        this.collision.verticies[2].oldPosition.set(x+this.collision.w, y+this.collision.h);
+
+        this.collision.verticies[3].position.set(x+this.collision.w, y);
+        this.collision.verticies[3].oldPosition.set(x+this.collision.w, y);
+    }
+
 };

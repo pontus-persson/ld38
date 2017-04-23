@@ -133,6 +133,15 @@ var Rect = function(x, y, w, h, parent) {
                 } else if(game.world.getTile(tilex, tiley) == 6) {
                     game.world.setTile(tilex, tiley, 0);
                     game.world.shrinkMap();
+                } else if(game.world.getTile(tilex, tiley) == 7 || game.world.getTile(tilex, tiley) == 8) {
+                    game.world.setTile(tilex, tiley, 0);
+                    game.world.reloadMap();
+                    break;
+                } else if(game.world.getTile(tilex, tiley) == 9) {
+                    game.world.setTile(tilex, tiley, 0);
+                    game.assets.playSound('win')
+                    game.world.nextMap();
+                    break;
                 } else {
                     p.position.subVec(v);
                     tilex = Math.floor(p.position.x / game.world.tileSize.x),
@@ -141,7 +150,7 @@ var Rect = function(x, y, w, h, parent) {
             }
 
             // tilex = Math.floor(p.position.x / game.world.tileSize.x),
-            tiley = Math.floor((p.position.y+v.y*5)/ game.world.tileSize.y);
+            tiley = Math.floor((p.position.y+game.world.gravity) / game.world.tileSize.x);
             if(game.world.getTile(tilex, tiley) > 0) {
                 // console.log('CANJUMP', p.position.y);
                 // console.log('CANJUMP', game.world.getTile(tilex, tiley));

@@ -1,11 +1,81 @@
 @import "normalize.css";
 
 body {
+    overflow: hidden;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
 }
+
+h1 {
+    font-size: 5vw;
+}
+
+h2 {
+    font-size: 3vw;
+}
+
+p {
+    font-size: 1.2vw;
+}
+
+a {
+    color: #FFF;
+    &:visited {
+        color: #FFF;
+    }
+}
+
+canvas {
+    // display: none;
+}
+
+.splash {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #FFF;
+    background: rgba(0,0,0,0.95);
+    h1 {
+        position: relative;
+        color: #ff0060;
+    }
+    h2 {
+        position: relative;
+    }
+    p {
+        position: relative;
+    }    
+}
+
+.thanks {
+    display: none;
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #FFF;
+    background: rgba(0,0,0,0.9);
+    h2 {
+        position: relative;
+        top: 30vh;
+    }
+    p {
+        position: relative;
+        top: 80vh;
+    }
+}
+
 
 canvas, img {
     image-rendering: optimizeSpeed;

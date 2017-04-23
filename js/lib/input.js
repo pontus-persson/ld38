@@ -11,6 +11,8 @@ var Input = function() {
         'escape': 27,
         'plus':   107,
         'minus':  109,
+        'insert': 45,
+        'delete': 46,
         // function keys
         'f1': 112,
         'f2': 113,

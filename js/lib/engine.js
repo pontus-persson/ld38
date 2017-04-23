@@ -15,11 +15,13 @@ var Engine = function(canvasID) {
         normal: 0,
         pause: 1,
         splash: 2,
-        victory: 3,
+        loadscreen: 3,
+        victory: 4,
     };
     this.state = this.GAMESTATE.splash;
-    this.entities = [];
+    // this.entities = [];
     this.player = new Entity(20, this.world.getBounds().y - 48 - 38);
+    this.debug = false;
 
     /**
      * Initiate everything
@@ -29,6 +31,12 @@ var Engine = function(canvasID) {
         self.renderer.resize();
         self.renderer.tiles = self.assets.loadImage('assets/images/tiles.png', 'tiles');
         self.renderer.splash = self.assets.loadImage('assets/images/splash.png', 'splash');
+        self.assets.loadSound('assets/sounds/plong.wav', 'plong');
+        self.assets.loadSound('assets/sounds/grow3.wav', 'grow');
+        self.assets.loadSound('assets/sounds/shrink2.wav', 'shrink');
+        self.assets.loadSound('assets/sounds/win.wav', 'win');
+
+        self.world.reloadMap();
 
         // remove context menu
         $('body').on('contextmenu', function(e){ return false; });
@@ -45,6 +53,8 @@ var Engine = function(canvasID) {
         // for (var i = 0; i < 11; i++) {
         //     self.entities.push(new Entity(self.renderer.canvas.width, self.renderer.canvas.height));
         // }
+
+        self.track();
 
         // start drawing
         window.requestAnimFrame(self.renderer.draw);
@@ -68,15 +78,20 @@ var Engine = function(canvasID) {
                 break;
 
             case self.GAMESTATE.pause:
+                // todo: some kind of pause menu?
                 self.handleInput();
-                // todo: some kind of pause menu?7
                 break;
 
-            case self.GAMESTATE.splash:
-                self.handleInput();
+            case self.GAMESTATE.loadscreen:
+                // ignore input while loading
+                break;
+
+            case self.GAMESTATE.victory:
+                // ignore input while loading
                 break;
         
             default:
+                self.handleInput();
                 break;
         }
     }
@@ -85,7 +100,8 @@ var Engine = function(canvasID) {
      * Update game
      */
      this.updateGame = function() {
-        self.player.collision.updatePoints();
+        if(!self.world.shrinking && !self.world.growing)
+            self.player.collision.updatePoints();
         for (var j = 0; j < 3; j++) {
             self.player.collision.updateLines();
             self.player.collision.constrainPoints();
@@ -110,7 +126,14 @@ var Engine = function(canvasID) {
     this.handleInput = function() {
         if (self.input.isKeyPressed('escape')) {
             self.state = game.GAMESTATE.pause;
+            $('canvas').fadeOut('fast');
+            $('.splash').fadeIn('fast');
         } else if (self.input.isKeyPressed('enter')) {
+            if(self.state !== game.GAMESTATE.normal) {
+                self.assets.playSound('plong');
+                $('canvas').fadeIn('fast');
+                $('.splash').fadeOut('fast');
+            }
             self.state = game.GAMESTATE.normal;
         }
         if (self.input.isButtonPressed('left') && !self.input.pressed) {
@@ -148,12 +171,35 @@ var Engine = function(canvasID) {
             self.player.velocity.y = 0;
         }
         
+        if (self.input.isKeyPressed('insert')) {
+            this.debug = true;
+        } else if (self.input.isKeyPressed('delete')) {
+            this.debug = false;
+        }
+
         if (self.input.isKeyPressed('plus')) {
             self.world.growMap();
         } else if (self.input.isKeyPressed('minus')) {
             self.world.shrinkMap();
         }
 
+    }
+
+    this.showVictory = function() {
+        self.state = self.GAMESTATE.victory;
+        // $('canvas').fadeOut('fast');
+        $('.thanks').fadeIn('fast');
+    }
+
+    this.track = function(category, action, label) {
+        if(ga) {
+            ga('send', {
+                hitType: 'event',
+                eventCategory: category,
+                eventAction: action,
+                eventLabel: label
+            });
+        }
     }
 
 };

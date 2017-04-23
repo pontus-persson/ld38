@@ -10,71 +10,56 @@ var World = function() {
 
     this.tileSize = new Vec2(48, 48);
 
-    this.map = [
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,1],
-        [0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,1],
-        [0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,1,6,0,0,0,0,0,0,0,0,0],
-        [3,2,2,2,2,2,2,2,2,1,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],
-    ];
-    this.mapSize = new Vec2(40, 32);
-
-    console.log(this.map.length, this.map[0].length);
+    this.currentMap = 1;
+    this.map = [[]];
+    this.mapSize = new Vec2();
 
     this.animationstep = 0;
 
     this.draw = function(ctx) {
         var p = game.player.collision.position;
         var c = game.player.collision.center;
-        var startx = Math.floor((c.x - game.renderer.canvas.width / 2) / this.tileSize.x) - 0;
-        var starty = Math.floor((c.y - game.renderer.canvas.height / 2) / this.tileSize.y) - 0;
+        var startx = Math.floor((c.x - game.renderer.canvas.width / 2) / this.tileSize.x) - 1;
+        var starty = Math.floor((c.y - game.renderer.canvas.height / 2) / this.tileSize.y) - 1;
         var stopx = Math.floor((c.x + game.renderer.canvas.width / 2) / this.tileSize.x) + 2;
         var stopy = Math.floor((c.y + game.renderer.canvas.height / 2) / this.tileSize.y) + 2;
 
         var w = 0;
         if((this.growing && this.animationstep > 0)) {
-            this.animationstep -= 0.5;
+            this.animationstep -= 1;
             w = this.tileSize.x - this.animationstep;
             if(this.animationstep <= 0) {
                 this.growing = false;
                 // this.mapSize.x++;
             }
+            game.player.move(w,0);
         }
         if((this.shrinking && this.animationstep > 0)) {
-            this.animationstep -= 0.5;
+            this.animationstep -= 1;
             w = this.animationstep;
             if(this.animationstep <= 0) {
                 this.shrinking = false;
                 this.mapSize.x--;
             }
-            // console.log(w);
+            game.player.move(-w,0);
+        }
+
+        // bounds on the screen
+        var numbounds = Math.ceil((stopx - startx) / this.mapSize.x);
+        // var px = Math.round(c.x / this.tileSize.x);
+
+        var boundToLeft = 0;
+        for (var x = startx; x < stopx; x++) {
+            var getx = (x < 0 || (x > this.mapSize.x - 1)) ? x % this.mapSize.x : x;
+            if(getx < 0) {
+                getx = this.mapSize.x + getx;
+            }
+            if(getx == this.mapSize.x - 1) {
+                // console.log(x < Math.floor(c.x / this.tileSize.x));
+                boundToLeft += (x < Math.floor(c.x / this.tileSize.x) ? 1 : 0);
+                // , game.renderer.canvas.width/2
+                // console.log(x);
+            }
         }
 
         var sourcex, sourcey, 
@@ -83,16 +68,20 @@ var World = function() {
             destw = this.tileSize.x, desth = this.tileSize.y;
         for (var y = starty; y < stopy; y++) {
             desty = Math.round(this.tileSize.y * y);
-            destx = Math.round(this.tileSize.x * (startx - 1));
+            destx = Math.round(this.tileSize.x * (startx - 1)) + ((boundToLeft && (this.shrinking || this.growing)) ? (this.tileSize.x - w) * boundToLeft : 0);
             for (var x = startx; x < stopx; x++) {
                 var getx = (x < 0 || (x > this.mapSize.x - 1)) ? x % this.mapSize.x : x;
                 if(getx < 0) {
                     getx = this.mapSize.x + getx;
                 }
-                if(this.shrinking && (getx == this.mapSize.x - 1)) {
-                    destx += w;
+                if((this.shrinking || this.growing) && (getx == this.mapSize.x - 1)) {
+                    destx += this.tileSize.x;
                     destw = w;
                     sourcew = w;
+                } else if((this.shrinking || this.growing) && (getx == 0)) {
+                    destx += w;
+                    destw = this.tileSize.x;
+                    sourcew = this.tileSize.x;
                 } else {
                     destx += this.tileSize.x;
                     destw = this.tileSize.x;
@@ -102,21 +91,23 @@ var World = function() {
                 if(tile > 0) {
                     // logsec(tile);
                     switch (tile) {
-                        case 8:
+                        case 0:
                             sourcey = this.tileSize.x * 1;
                             sourcex = this.tileSize.x * 0;
-                            break;
-                        case 9:
-                            sourcey = this.tileSize.x * 1;
-                            sourcex = this.tileSize.x * 1;
                             break;
                         default:
                             sourcey = this.tileSize.x * Math.floor(tile / 5);
                             sourcex = this.tileSize.x * (tile % 5);
                             break;
                     }
-                    ctx.drawImage(game.renderer.tiles, sourcex, sourcey, sourcew, sourceh, destx, desty, destw, desth);
+                    ctx.drawImage(game.renderer.tiles, sourcex, sourcey, sourcew, sourceh, 
+                                                       destx,   desty,   destw,   desth);
                     // logsec(sourcex, sourcey, sourcew, sourceh, destx, desty, destw, desth);
+                    if(game.debug) {
+                        ctx.strokeStyle = '#FF00FF';
+                        ctx.rect(destx,   desty,   destw,   desth);
+                        ctx.stroke();
+                    }
                 }
             }
         }
@@ -165,6 +156,7 @@ var World = function() {
 
     this.growMap = function() {
         if(!this.growing && this.mapSize.x < this.map[0].length) {
+            game.assets.playSound('grow');
             this.growing = true;
             this.animationstep = this.tileSize.x;
             this.mapSize.x++;
@@ -173,10 +165,40 @@ var World = function() {
 
     this.shrinkMap = function() {
         if(!this.shrinking && this.mapSize.x > this.map[0].length / 2) {
+            game.assets.playSound('shrink');
             this.shrinking = true;
             this.animationstep = this.tileSize.x;
             // this.mapSize.x--;
         }
+    }
+
+    this.loadMap = function(url) {
+        // game.state =  game.GAMESTATE.loading;
+        $.getJSON(url, function(json) {
+            if(!json) return;
+            self.map = json.map; 
+            self.mapSize.x = json.size.x;
+            self.mapSize.y = json.size.y;
+            game.player.setPos(json.start.x * self.tileSize.x, json.start.y * self.tileSize.y);
+            game.player.velocity.set(0, 0);
+            // console.log(json.size.x, json.size.y, '==', json.map[0].length, json.map.length);
+            // game.state = game.GAMESTATE.normal;
+        });        
+    }
+
+    this.reloadMap = function() {
+        this.loadMap('maps/map'+this.currentMap+'.json');
+    }
+
+    this.nextMap = function() {
+        this.currentMap++;
+        game.track('world', 'progressing', 'Loading level'+this.currentMap);
+        if(this.currentMap > 7) {
+            game.track('game', 'finished', 'Finished game!');
+            game.showVictory();
+            return false;
+        }
+        this.loadMap('maps/map'+this.currentMap+'.json');
     }
 
 };

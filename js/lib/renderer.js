@@ -37,11 +37,17 @@ var Renderer = function(canvasID) {
                 break;
 
             case game.GAMESTATE.pause:
-                self.drawSplash();
+                // self.drawSplash();
                 break;
 
             case game.GAMESTATE.splash:
-                self.drawSplash();
+                // self.drawSplash();
+                // self.drawGame();
+                break;
+
+            case game.GAMESTATE.victory:
+                // self.drawSplash();
+                self.drawGame();
                 break;
         
             default:
@@ -60,8 +66,6 @@ var Renderer = function(canvasID) {
         window.requestAnimFrame(self.draw);
     }
 
-
-
     this.drawGame = function() {
         // clear
         // self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
@@ -73,10 +77,10 @@ var Renderer = function(canvasID) {
                            -game.player.collision.center.y + self.canvas.height / 2);
 
         game.world.draw(self.ctx);
-        for (var i = 0; i < game.entities.length; i++) {
-            var entity = game.entities[i];
-            entity.draw(self.ctx);
-        }
+        // for (var i = 0; i < game.entities.length; i++) {
+        //     var entity = game.entities[i];
+        //     entity.draw(self.ctx);
+        // }
         game.player.draw(self.ctx);
 
         self.ctx.restore();
@@ -90,8 +94,11 @@ var Renderer = function(canvasID) {
         // self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height);
         self.ctx.fillStyle = '#9ecdc7';
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
-        // 480 x 240
-        self.ctx.drawImage(self.splash, self.canvas.width/2-240, self.canvas.height/2-120, 480, 240);
+        // 480 x 360
+        var r = 360 / 480;
+        var w = self.canvas.width * 0.75;
+        var h = w * r;
+        self.ctx.drawImage(self.splash, self.canvas.width/2-w/2, 0, w, h);
 
         self.ctx.font = "20pt Arial";
         self.ctx.fillStyle = "#000000";
