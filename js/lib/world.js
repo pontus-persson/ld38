@@ -179,7 +179,7 @@ var World = function() {
             self.mapSize.y = json.size.y;
             game.player.setPos(json.start.x * self.tileSize.x, json.start.y * self.tileSize.y);
             game.player.velocity.set(0, 0);
-            console.log(json.size.x, json.size.y, '==', json.map[0].length, json.map.length);
+            // console.log(json.size.x, json.size.y, '==', json.map[0].length, json.map.length);
             // game.state = game.GAMESTATE.normal;
         });        
     }
