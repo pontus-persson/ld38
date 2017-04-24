@@ -66,13 +66,14 @@ canvas {
     text-align: center;
     color: #FFF;
     background: rgba(0,0,0,0.9);
+    padding-top: 20vh;
     h2 {
         position: relative;
-        top: 30vh;
+        // top: 30vh;
     }
     p {
         position: relative;
-        top: 80vh;
+        // bottom: 10vh;
     }
 }
 

@@ -20,6 +20,8 @@ var Rect = function(x, y, w, h, parent) {
         new Line(this.verticies[1], this.verticies[3], this),
     ];
 
+    this.edgeCount = 4; // only 4 lines used for collision
+
     this.w = w || 0;
     this.h = h || 0;
     this.parent = parent || null;
@@ -115,6 +117,7 @@ var Rect = function(x, y, w, h, parent) {
 
     // constrain points
     this.constrainPoints = function() {
+
 		for (var i = 0; i < this.verticies.length; i++) {
             var p = this.verticies[i],
                 v = new Vec2((p.position.x - p.oldPosition.x),
@@ -134,6 +137,8 @@ var Rect = function(x, y, w, h, parent) {
                     game.world.setTile(tilex, tiley, 0);
                     game.world.shrinkMap();
                 } else if(game.world.getTile(tilex, tiley) == 7 || game.world.getTile(tilex, tiley) == 8) {
+                    game.assets.playSound('hurt');
+                    game.track('game', 'died', 'Died at world '+game.world.currentMap);
                     game.world.setTile(tilex, tiley, 0);
                     game.world.reloadMap();
                     break;
@@ -152,13 +157,14 @@ var Rect = function(x, y, w, h, parent) {
             // tilex = Math.floor(p.position.x / game.world.tileSize.x),
             tiley = Math.floor((p.position.y+game.world.gravity) / game.world.tileSize.x);
             if(game.world.getTile(tilex, tiley) > 0) {
-                // console.log('CANJUMP', p.position.y);
-                // console.log('CANJUMP', game.world.getTile(tilex, tiley));
-                // console.log('CANJUMP', tilex, tiley);
                 // logsec(game.world.getTile(tilex, tiley));
                 this.parent.canJump = true;
                 this.parent.canSpin = true;
             }
 		}
+
+
     }
+
+
 }

@@ -73,8 +73,8 @@ var Renderer = function(canvasID) {
         self.ctx.fillRect(0, 0, self.canvas.width, self.canvas.height);
 
         self.ctx.save();
-        self.ctx.translate(-game.player.collision.center.x + self.canvas.width / 2,
-                           -game.player.collision.center.y + self.canvas.height / 2);
+        self.ctx.translate(Math.round(-game.player.collision.center.x + self.canvas.width / 2),
+                           Math.round(-game.player.collision.center.y + self.canvas.height / 2));
 
         game.world.draw(self.ctx);
         // for (var i = 0; i < game.entities.length; i++) {

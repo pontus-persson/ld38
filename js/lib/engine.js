@@ -35,6 +35,7 @@ var Engine = function(canvasID) {
         self.assets.loadSound('assets/sounds/grow3.wav', 'grow');
         self.assets.loadSound('assets/sounds/shrink2.wav', 'shrink');
         self.assets.loadSound('assets/sounds/win.wav', 'win');
+        self.assets.loadSound('assets/sounds/hurt.wav', 'hurt');
 
         self.world.reloadMap();
 
@@ -146,6 +147,7 @@ var Engine = function(canvasID) {
         if (self.input.isKeyPressed('a') || self.input.isKeyPressed('left')) {
             if (self.player.canSpin) {
                 self.player.velocity.x = -1.4;
+                self.player.velocity.y = 0.1;
                 self.player.canSpin = false;
             } else {
                 self.player.velocity.x = -0.1;
@@ -154,6 +156,7 @@ var Engine = function(canvasID) {
         } else if (self.input.isKeyPressed('d') || self.input.isKeyPressed('right')) {
             if (self.player.canSpin) {
                 self.player.velocity.x = 1.4;
+                self.player.velocity.y = 0.1;
                 self.player.canSpin = false;
             } else {
                 self.player.velocity.x = 0.1;
@@ -177,10 +180,9 @@ var Engine = function(canvasID) {
             this.debug = false;
         }
 
-        if (self.input.isKeyPressed('plus')) {
-            self.world.growMap();
-        } else if (self.input.isKeyPressed('minus')) {
-            self.world.shrinkMap();
+        if (self.input.isKeyPressed('f2') && this.debug) {
+            self.world.reloadMap();
+            this.debug = false;
         }
 
     }

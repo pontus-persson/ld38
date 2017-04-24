@@ -32,7 +32,6 @@ var World = function() {
                 this.growing = false;
                 // this.mapSize.x++;
             }
-            game.player.move(w,0);
         }
         if((this.shrinking && this.animationstep > 0)) {
             this.animationstep -= 1;
@@ -41,7 +40,6 @@ var World = function() {
                 this.shrinking = false;
                 this.mapSize.x--;
             }
-            game.player.move(-w,0);
         }
 
         // bounds on the screen
@@ -181,7 +179,7 @@ var World = function() {
             self.mapSize.y = json.size.y;
             game.player.setPos(json.start.x * self.tileSize.x, json.start.y * self.tileSize.y);
             game.player.velocity.set(0, 0);
-            // console.log(json.size.x, json.size.y, '==', json.map[0].length, json.map.length);
+            console.log(json.size.x, json.size.y, '==', json.map[0].length, json.map.length);
             // game.state = game.GAMESTATE.normal;
         });        
     }
@@ -192,8 +190,8 @@ var World = function() {
 
     this.nextMap = function() {
         this.currentMap++;
-        game.track('world', 'progressing', 'Loading level'+this.currentMap);
-        if(this.currentMap > 7) {
+        game.track('world', 'progressing', 'Loading level '+this.currentMap);
+        if(this.currentMap > 9) {
             game.track('game', 'finished', 'Finished game!');
             game.showVictory();
             return false;

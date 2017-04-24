@@ -29,7 +29,6 @@
         'lib/line',
         'lib/rect',
         'lib/circle',
-        'lib/collision',
         'lib/entity',
         'lib/assets',
         'lib/world',

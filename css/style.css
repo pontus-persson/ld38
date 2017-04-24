@@ -50,13 +50,12 @@ a {
   bottom: 0;
   text-align: center;
   color: #FFF;
-  background: rgba(0, 0, 0, 0.9); }
+  background: rgba(0, 0, 0, 0.9);
+  padding-top: 20vh; }
   .thanks h2 {
-    position: relative;
-    top: 30vh; }
+    position: relative; }
   .thanks p {
-    position: relative;
-    top: 80vh; }
+    position: relative; }
 
 canvas, img {
   image-rendering: optimizeSpeed;

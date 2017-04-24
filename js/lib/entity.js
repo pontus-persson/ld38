@@ -17,10 +17,9 @@ var Entity = function(x, y) {
         self.collision.draw(ctx);
     }
 
-    this.move = function(x, y) {
-
-    }
-
+    /**
+     * Move all verticies at once
+     */
     this.setPos = function(x, y) {
         this.collision.verticies[0].position.set(x, y);
         this.collision.verticies[0].oldPosition.set(x, y);
