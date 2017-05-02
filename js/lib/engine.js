@@ -30,7 +30,6 @@ var Engine = function(canvasID) {
         // resize once to set correct size on load
         self.renderer.resize();
         self.renderer.tiles = self.assets.loadImage('assets/images/tiles.png', 'tiles');
-        self.renderer.splash = self.assets.loadImage('assets/images/splash.png', 'splash');
         self.assets.loadSound('assets/sounds/plong.wav', 'plong');
         self.assets.loadSound('assets/sounds/grow3.wav', 'grow');
         self.assets.loadSound('assets/sounds/shrink2.wav', 'shrink');
@@ -90,7 +89,7 @@ var Engine = function(canvasID) {
             case self.GAMESTATE.victory:
                 // ignore input while loading
                 break;
-        
+
             default:
                 self.handleInput();
                 break;
@@ -103,22 +102,10 @@ var Engine = function(canvasID) {
      this.updateGame = function() {
         if(!self.world.shrinking && !self.world.growing)
             self.player.collision.updatePoints();
-        for (var j = 0; j < 3; j++) {
-            self.player.collision.updateLines();
-            self.player.collision.constrainPoints();
-        }
-
-        // for (var i = 0; i < self.entities.length; i++) {
-        //     var entity = self.entities[i];
-        //     entity.update();
-        // }
-        // for (var i = 0; i < self.entities.length; i++) {
-        //     var entity1 = self.entities[i];
-        //     for (var j = i + 1; j < self.entities.length; j++) {
-        //         var entity2 = self.entities[j];
-        //         // entity1.collide(entity2);
-        //     }
-        // }
+            for (var j = 0; j < 3; j++) {
+                self.player.collision.updateLines();
+                self.player.collision.constrainPoints();
+            }
      }
 
     /**
@@ -139,7 +126,6 @@ var Engine = function(canvasID) {
         }
         if (self.input.isButtonPressed('left') && !self.input.pressed) {
             self.input.pressed = true;
-            // console.log(self.entities);
         } else if (!self.input.isButtonPressed('left')) {
             self.input.pressed = false;
         }
@@ -173,11 +159,18 @@ var Engine = function(canvasID) {
         } else {
             self.player.velocity.y = 0;
         }
-        
+
         if (self.input.isKeyPressed('insert')) {
             this.debug = true;
         } else if (self.input.isKeyPressed('delete')) {
             this.debug = false;
+        }
+
+        if (self.input.isKeyPressed('r') && !this.loading) {
+            this.loading = true;
+            self.world.reloadMap();
+        } else if(!self.input.isKeyPressed('r')) {
+            this.loading = false;
         }
 
         if (self.input.isKeyPressed('f2') && this.debug) {

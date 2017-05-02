@@ -53,16 +53,13 @@ var World = function() {
                 getx = this.mapSize.x + getx;
             }
             if(getx == this.mapSize.x - 1) {
-                // console.log(x < Math.floor(c.x / this.tileSize.x));
                 boundToLeft += (x < Math.floor(c.x / this.tileSize.x) ? 1 : 0);
-                // , game.renderer.canvas.width/2
-                // console.log(x);
             }
         }
 
-        var sourcex, sourcey, 
-            sourcew = this.tileSize.x, sourceh = this.tileSize.y, 
-            destx, desty, 
+        var sourcex, sourcey,
+            sourcew = this.tileSize.x, sourceh = this.tileSize.y,
+            destx, desty,
             destw = this.tileSize.x, desth = this.tileSize.y;
         for (var y = starty; y < stopy; y++) {
             desty = Math.round(this.tileSize.y * y);
@@ -98,14 +95,14 @@ var World = function() {
                             sourcex = this.tileSize.x * (tile % 5);
                             break;
                     }
-                    ctx.drawImage(game.renderer.tiles, sourcex, sourcey, sourcew, sourceh, 
+                    ctx.drawImage(game.renderer.tiles, sourcex, sourcey, sourcew, sourceh,
                                                        destx,   desty,   destw,   desth);
-                    // logsec(sourcex, sourcey, sourcew, sourceh, destx, desty, destw, desth);
-                    if(game.debug) {
-                        ctx.strokeStyle = '#FF00FF';
-                        ctx.rect(destx,   desty,   destw,   desth);
-                        ctx.stroke();
-                    }
+                    // // logsec(sourcex, sourcey, sourcew, sourceh, destx, desty, destw, desth);
+                    // if(game.debug) {
+                    //     ctx.strokeStyle = '#FF00FF';
+                    //     ctx.rect(destx,   desty,   destw,   desth);
+                    //     ctx.stroke();
+                    // }
                 }
             }
         }
@@ -174,14 +171,12 @@ var World = function() {
         // game.state =  game.GAMESTATE.loading;
         $.getJSON(url, function(json) {
             if(!json) return;
-            self.map = json.map; 
+            self.map = json.map;
             self.mapSize.x = json.size.x;
             self.mapSize.y = json.size.y;
             game.player.setPos(json.start.x * self.tileSize.x, json.start.y * self.tileSize.y);
             game.player.velocity.set(0, 0);
-            // console.log(json.size.x, json.size.y, '==', json.map[0].length, json.map.length);
-            // game.state = game.GAMESTATE.normal;
-        });        
+        });
     }
 
     this.reloadMap = function() {

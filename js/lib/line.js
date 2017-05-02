@@ -1,9 +1,9 @@
 "use strict";
 /**
  * Line between two points
- * @param {*} v1 
- * @param {*} v2 
- * @param {*} parent 
+ * @param {*} v1
+ * @param {*} v2
+ * @param {*} parent
  */
 var Line = function(v1, v2, parent) {
     var self = this;
@@ -16,15 +16,15 @@ var Line = function(v1, v2, parent) {
 
     // The wanted Line length
     this.len = this.delta.len();
-    
+
     // this.delta.normalize();
 
-    this.draw = function(ctx) {
+    this.draw = function(ctx, col) {
 		ctx.beginPath();
 		ctx.moveTo(this.v1.position.x, this.v1.position.y);
         ctx.lineTo(this.v2.position.x, this.v2.position.y);
 		ctx.closePath();
-        ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+        ctx.strokeStyle = col || 'rgba(0, 0, 0, 1)';
         // ctx.strokeStyle = '#000000';
 		ctx.stroke();
     }

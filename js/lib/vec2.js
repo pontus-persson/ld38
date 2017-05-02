@@ -95,5 +95,12 @@ var Vec2 = function(x, y) {
             this.mul(limit);
         }
         return this;
+    },
+    this.draw = function(ctx, col) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fillStyle = col || "#FFFFFF";
+        ctx.fill();
     }
 }
